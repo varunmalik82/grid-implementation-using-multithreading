@@ -11,16 +11,16 @@ import java.util.Map;
 
 public class iOSTest extends BaseTest {
 
-    public iOSTest(){super("ios");
+    public iOSTest() {
+        super("ios");
     }
 
-    public iOSTest(int deviceNum){
+    public iOSTest(int deviceNum) {
         super(deviceNum, "ios");
     }
 
-    public void login(){
-        try{
-
+    public void login() {
+        try {
             WebDriverWait wait = new WebDriverWait(iOSDriver, 30);
             Thread.sleep(5000);
             iOSDriver.findElement(By.xpath("//XCUIElementTypeButton[@name=\"SignInButton\"]")).click();
@@ -39,24 +39,21 @@ public class iOSTest extends BaseTest {
 
             iOSDriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"logout_button\"]")).click();
 
-
-
             Thread.sleep(2000);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void composeEmail(){
+    public void composeEmail() {
         System.out.println("**********Composing email....");
     }
 
-    public void logout(){
+    public void logout() {
         System.out.println("***********logging out....");
     }
 
-    public void run(){
+    public void run() {
 
         try {
             createIOSDriver(); // create devices
@@ -76,17 +73,17 @@ public class iOSTest extends BaseTest {
         iOSTest iosTest = new iOSTest();
 
         // Get connected device count
-        int totalDevices=iosTest.deviceCount;
+        int totalDevices = iosTest.deviceCount;
 
         // Initialize threads for each connected devices
         iOSTest[] threads = new iOSTest[totalDevices];
 
         // Create threads for each connected devices
-        for(int i=0;i<totalDevices;i++)
+        for (int i = 0; i < totalDevices; i++)
             threads[i] = new iOSTest(i);
 
         // Start running execution on each device
-        for(int i=0;i<totalDevices;i++)
+        for (int i = 0; i < totalDevices; i++)
             threads[i].start();
     }
 }
